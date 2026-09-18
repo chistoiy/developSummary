@@ -1,0 +1,9 @@
+# 本仓库只放 Markdown 方案文档，不需要忽略太多东西。
+# 但避免误提交本地编辑器/系统产生的垃圾文件。
+.DS_Store
+Thumbs.db
+*.swp
+*.tmp
+~$*.docx
+.idea/
+.vscode/
