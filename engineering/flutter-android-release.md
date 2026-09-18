@@ -50,6 +50,21 @@
   ```
 
 - **R5** 出包必须在**所有代码改动完成之后**启动（构建中途改 Dart → 产物与源码不一致）。
+- **R5b** **构建失败时 `build/app/outputs/flutter-apk/` 里仍然是上一版产物**。
+  此时若无条件 `cp`，会把旧包复制成新名字、甚至上传成新版本——而且全程不报错。
+  所以拷贝/上传前必须"确认构建成功"，拷贝后必须核对版本：
+
+  ```bash
+  # 构建：显式看结果，不要只看运行完没报错
+  flutter build apk --release --split-per-abi --build-number <基号> 2>&1 \
+    | grep -E "^e: |Built|FAILURE:"      # 有 e:/FAILURE 就是失败，后面的 cp 一律别做
+  # 拷贝后核对（把"版本对不对"变成一条命令的判断，而不是靠眼睛）
+  V=$(aapt2 dump badging dist/xxx.apk | grep -oE "versionCode='[0-9]+'" | grep -oE "[0-9]+")
+  [ "$V" = "<期望的 versionCode>" ] || { echo "❌ 版本不符，拒绝安装/上传"; exit 1; }
+  ```
+
+  > 这条被同一项目在两天内踩了两次：一次是把旧版本 per-ABI 包当新版上传，
+  > 一次是构建失败后 `cp` 把旧包复制成新名字（并"成功"装到了手机上）。
 
 ### 装机
 
@@ -140,6 +155,7 @@ echo "核对：aapt2 dump badging <apk> | grep -E '^package:|^native-code:'"
 | 现象 | 根因 |
 |---|---|
 | **把旧版本的包当成新版传上去** | 用 `--target-platform` 打通用包后，`build/app/outputs/flutter-apk/` 下**残留上一版的 per-ABI 文件**；照文件名拷贝就拷到了旧包。R4 的逐个核对就是为此 |
+| **构建失败却"成功"装了/传了旧包** | `flutter build` 失败时输出目录里仍是上一版产物；`cp` 照样成功、`adb install` 也照样成功——全程零报错。必须按 R5b 先看构建结果、再核对产物版本 |
 | 老机器装不上新版 | 只按基号判断，忘了每 ABI 的偏移叠加（R3） |
 | 发版当天产物与源码不一致 | 构建启动后还在改代码（R5） |
 | debug 一切正常、release 编译失败 | 没单独跑 release 编译（C1） |
