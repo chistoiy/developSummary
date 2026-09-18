@@ -59,11 +59,19 @@
 
 ## 4. 文档索引
 
-| 文档 | 域 | 标签 | 成熟度 |
-|---|---|---|---|
-| [相册「滑动多选」需求与实现方案](mobile/flutter-gallery-drag-selection.md) | mobile | Flutter · 交互 · 多选 | ✅ 已落地 |
+**「什么场景用得上」这一列是必填的**——只看标题容易混淆（比如"取消"和"调度"听起来都像架构），
+真正决定要不要点进去的是场景。
 
-（新增文档后，请回来往这张表加一行。）
+| 文档 | 目录 | 什么场景用得上 | 标签 | 成熟度 |
+|---|---|---|---|---|
+| [相册「滑动多选」需求与实现方案](mobile/flutter-gallery-drag-selection.md) | mobile | 图片/文件浏览器要做"长按起选 → 按住滑动批量勾/撤"（微信式多选）；或要把已有的多选逻辑重整成可验收的规则 | Flutter · 交互 · 多选 | ✅ 已落地 |
+| [单通道设备的请求调度](mobile/single-channel-request-scheduler.md) | mobile | 对接**一次只能干一件事**的资源：蓝牙、USB/串口、单会话协议、限流 API；或列表滚动时出现请求风暴 / 设备报忙 | 架构 · 调度 · 硬件 | ✅ 已落地 |
+| [长任务的取消](mobile/long-task-cancellation.md) | mobile | 大文件传输 / 批量操作 / 长轮询 / 导出压缩，用户点了取消但没反应；或取消被当成了失败、又自动重试了一遍 | 交互 · 架构 · 取消 | ✅ 已落地 |
+| [Flutter Android 发布与分 ABI 打包](engineering/flutter-android-release.md) | engineering | 要给 Flutter Android 项目出 release 包、传 Release 附件、装机验证；尤其被 versionCode / 分 ABI / 产物核对搞晕过 | Flutter · Android · 发布 | ✅ 已落地 |
+| [性能优化前先定"物理上限"](engineering/performance-ceiling-first.md) | engineering | 有人问"能不能再快一点"；或你正要做性能优化、需要判断值不值得做；也用于评审别人的优化方案 | 性能 · 方法论 · 排查 | ✅ 已落地 |
+| [应用内日志与错误可反馈设计](engineering/app-log-and-error-reporting.md) | engineering | 交付给别人的 App **拿不到现场日志**（真机 / 客户环境 / 无 ADB）；用户只会说"崩了"，而你需要完整证据 | 可观测性 · 崩溃 · 反馈 | ✅ 已落地 |
+
+（新增文档后，请回来往这张表加一行，**场景那一列别空着**。）
 
 ---
 
