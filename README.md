@@ -75,6 +75,7 @@
 | [sqflite 版本驱动迁移框架 + FFI 测试](mobile/sqflite-versioned-migration-ffi-testing.md) | mobile | Flutter 本地 SQLite 要加字段/升版本；或 DB 测试在 widget 测试里死锁、构建机下载不到 sqlite3 原生库 | Flutter · sqflite · 迁移 · 测试 | ✅ 已落地 |
 | [模块解耦的可执行守护：import 架构测试](engineering/module-decoupling-architecture-guard.md) | engineering | 担心代码量上来后模块互相牵连（改 A 崩 B / 跨模块回归 / 测试漏测）；想把"不许互相 import"从口头约定变成 CI 红绿 | 架构 · 守护测试 · 解耦 | ✅ 已落地 |
 | [大模块端到端交付 SOP + GitHub 预发布带 APK](engineering/module-prerelease-delivery-sop.md) | engineering | 产品负责人要求"每完成大模块随时有包可装"；或 UI 需求总在高成本阶段才暴露分歧，需要原型确认门 | 流程 · 发布 · GitHub | ✅ 已落地 |
+| [时间网格「滑选多格 → 标记区间」](mobile/grid-timeslot-drag-mark.md) | mobile | 日程/排班/睡眠等 App 要把一天铺成格子让用户按住拖动批量标记；或需要"任意粒度全天一屏"的固定面积时间网格 | Flutter · 交互 · 手势 · 时间轴 | ✅ 已落地 |
 
 （新增文档后，请回来往这张表加一行，**场景那一列别空着**。）
 
