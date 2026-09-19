@@ -71,6 +71,11 @@
 | [性能优化前先定"物理上限"](engineering/performance-ceiling-first.md) | engineering | 有人问"能不能再快一点"；或你正要做性能优化、需要判断值不值得做；也用于评审别人的优化方案 | 性能 · 方法论 · 排查 | ✅ 已落地 |
 | [应用内日志与错误可反馈设计](engineering/app-log-and-error-reporting.md) | engineering | 交付给别人的 App **拿不到现场日志**（真机 / 客户环境 / 无 ADB）；用户只会说"崩了"，而你需要完整证据 | 可观测性 · 崩溃 · 反馈 | ✅ 已落地 |
 
+| [CSS 设计令牌驱动的 Flutter 多主题换肤引擎](mobile/design-token-theming-flutter.md) | mobile | 项目要支持多套主题/换肤，且已有或想做 Web 高保真原型共用同一批设计令牌；或深色模式与主题风格需要正交组合 | Flutter · 主题 · 设计令牌 | ✅ 已落地 |
+| [sqflite 版本驱动迁移框架 + FFI 测试](mobile/sqflite-versioned-migration-ffi-testing.md) | mobile | Flutter 本地 SQLite 要加字段/升版本；或 DB 测试在 widget 测试里死锁、构建机下载不到 sqlite3 原生库 | Flutter · sqflite · 迁移 · 测试 | ✅ 已落地 |
+| [模块解耦的可执行守护：import 架构测试](engineering/module-decoupling-architecture-guard.md) | engineering | 担心代码量上来后模块互相牵连（改 A 崩 B / 跨模块回归 / 测试漏测）；想把"不许互相 import"从口头约定变成 CI 红绿 | 架构 · 守护测试 · 解耦 | ✅ 已落地 |
+| [大模块端到端交付 SOP + GitHub 预发布带 APK](engineering/module-prerelease-delivery-sop.md) | engineering | 产品负责人要求"每完成大模块随时有包可装"；或 UI 需求总在高成本阶段才暴露分歧，需要原型确认门 | 流程 · 发布 · GitHub | ✅ 已落地 |
+
 （新增文档后，请回来往这张表加一行，**场景那一列别空着**。）
 
 ---
