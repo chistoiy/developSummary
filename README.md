@@ -77,6 +77,7 @@
 | [大模块端到端交付 SOP + GitHub 预发布带 APK](engineering/module-prerelease-delivery-sop.md) | engineering | 产品负责人要求"每完成大模块随时有包可装"；或 UI 需求总在高成本阶段才暴露分歧，需要原型确认门 | 流程 · 发布 · GitHub | ✅ 已落地 |
 | [时间网格「滑选多格 → 标记区间」](mobile/grid-timeslot-drag-mark.md) | mobile | 日程/排班/睡眠等 App 要把一天铺成格子让用户按住拖动批量标记；或需要"任意粒度全天一屏"的固定面积时间网格 | Flutter · 交互 · 手势 · 时间轴 | ✅ 已落地 |
 | [Flutter 测试/运行挂死的 VM Service 现场取证法](mobile/flutter-test-hang-vm-forensics.md) | mobile | widget 测试或真机页面挂死不动、CPU 满核、内存无界增长、`--timeout` 杀不掉；要给无日志黑盒挂起拿到栈级根因 | Flutter · 调试 · VM Service · 守护测试 | ✅ 已落地并验证 |
+| [云盘直连：坚果云 WebDAV 与缤纷云 S3 的接入规则](protocol/cloud-storage-webdav-s3.md) | protocol | 手机/桌面 App 要直连网盘做目录增量同步；要同时接「只有 WebDAV」的坚果云与「只有 S3」的缤纷云；或被 403 SignatureDoesNotMatch、PROPFIND 拿不到容量、刚同步完的文件全被判「已修改」这类坑卡住 | 协议 · WebDAV · S3 · 限流 | ✅ 已落地并验证 |
 
 （新增文档后，请回来往这张表加一行，**场景那一列别空着**。）
 
