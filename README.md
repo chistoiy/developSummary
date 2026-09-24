@@ -79,6 +79,8 @@
 | [Flutter 测试/运行挂死的 VM Service 现场取证法](mobile/flutter-test-hang-vm-forensics.md) | mobile | widget 测试或真机页面挂死不动、CPU 满核、内存无界增长、`--timeout` 杀不掉；要给无日志黑盒挂起拿到栈级根因 | Flutter · 调试 · VM Service · 守护测试 | ✅ 已落地并验证 |
 | [云盘直连：坚果云 WebDAV 与缤纷云 S3 的接入规则](protocol/cloud-storage-webdav-s3.md) | protocol | 手机/桌面 App 要直连网盘做目录增量同步；要同时接「只有 WebDAV」的坚果云与「只有 S3」的缤纷云；或被 403 SignatureDoesNotMatch、PROPFIND 拿不到容量、刚同步完的文件全被判「已修改」这类坑卡住 | 协议 · WebDAV · S3 · 限流 | ✅ 已落地并验证 |
 
+| [高保真设计会话 → 开场白 → 开发会话的并行交接流程](engineering/parallel-design-kickoff-handoff.md) | engineering | 模块的 AI 高保真设计与代码开发要拆到不同会话并行推进；或交接总要靠"把需求再讲一遍"；或多会话同改一个原型文件互相覆盖 | 流程 · AI协作 · 原型 · 交接 | ✅ 已落地并验证 |
+
 （新增文档后，请回来往这张表加一行，**场景那一列别空着**。）
 
 ---
