@@ -4,7 +4,7 @@
 |---|---|
 | 标签 | `engineering` `Flutter` `Android` `发布` `CI` |
 | 成熟度 | ✅ 已落地并多次发布验证 |
-| 来源项目 | NikonSync（Flutter + Kotlin 的 Android App） |
+| 来源项目 | NikonSync（Flutter + Kotlin 的 Android App）；R11 双端附件通道源自 LifeHarness（v0.1.11~v0.1.19 多次实测验证） |
 | 参考实现 | `build_apk.sh` / `build_apk.bat` / `.build_number` / 发布流程 |
 | 适配成本 | 低：换 applicationId、包名与签名配置即可 |
 
@@ -86,6 +86,22 @@
   ```
 
 - **R10** 脚本要能一键跑，并自动递增基号（见第 8 节）。
+- **R11** 国内镜像平台（Gitee）「镜像双推」= 双端 release + **双端附件**。
+  `gitee release create` 只建条目、**不支持附件**，也没有 CLI 上传子命令——
+  附件固定用 API `attach_files` 端点逐包补挂（实测 201；**不是** `upload_file`/`attachers`，均 404）：
+
+  ```bash
+  TOK=$("…/gitee.exe" auth token | grep -Eo '[A-Za-z0-9_-]{20,}' | head -1)   # token 只进 shell 变量，不落文件
+  "…/gitee.exe" api "repos/<owner>/<repo>/releases"        # 查目标 tag 的 numericId（路径不带前导斜杠）
+  for abi in arm64-v8a armeabi-v7a x86_64; do
+    curl -s -o /dev/null -w "%{http_code}\n" -X POST \
+      "https://gitee.com/api/v5/repos/<owner>/<repo>/releases/<numericId>/attach_files?access_token=$TOK" \
+      -F name="app-$abi-release.apk" -F "file=@build/app/outputs/flutter-apk/app-$abi-release.apk"
+  done                                                        # 期望三行 201
+  "…/gitee.exe" api "repos/<owner>/<repo>/releases/<numericId>" | grep -o '"name":"app-[^"]*"'   # 三行齐才算挂上
+  ```
+
+  「先建 release 再补附件」是正常顺序；收口前必须核对**两端** assets 非空再汇报。
 
 ## 3. 前置校验
 
@@ -148,6 +164,7 @@ echo "核对：aapt2 dump badging <apk> | grep -E '^package:|^native-code:'"
 - [ ] 装到真机：`dumpsys package <pkg>` 显示的 versionCode 与预期一致
 - [ ] 从上一版**覆盖安装**成功，且本地数据（记录/设置）保留
 - [ ] Release 页面三个附件都在，`Latest` 标记正确
+- [ ] 双端发布（GitHub+Gitee）时两端 release 的 APK 附件都非空（R11，三行 201 + api 复核）
 - [ ] 用 debug 包覆盖 release 会明确失败（而不是静默降级）
 
 ## 7. 已知坑
@@ -163,9 +180,11 @@ echo "核对：aapt2 dump badging <apk> | grep -E '^package:|^native-code:'"
 | 脚本打印的路径是错的 | 脚本里 `\a` 被写成 0x07 控制字符（历史遗留）；现在改成了变量拼接 |
 | 构建失败（Maven 找不到 Flutter 引擎） | 镜像源缺构件，需要指定镜像变量（C3） |
 | 发布后找不到 APK | `dist/` 被 gitignore 但没上传附件（R8） |
+| Gitee release 只有正文没有 APK | `gitee release create` 不支持附件；须随后 POST `attach_files` 补挂（R11）。猜端点名（upload_file/attachers）会 404——通道在档就先查档再动手 |
 
 ## 8. 复用清单
 
 1. 拷贝上面的脚本，改镜像变量与起始基号。
 2. 把 `.build_number` 提交进仓库（发布序列需要团队共享）。
 3. 在 CI 或本地按第 6 节逐项验收；**至少保留"逐个 aapt2 核对"这一步**——它是唯一能防住"传错旧包"的环节。
+4. 若做国内平台镜像双推：照 R11 的 `attach_files` 三件套（查 id → 逐包 201 → api 复核非空），别猜端点名。
