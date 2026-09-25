@@ -70,10 +70,6 @@
 | [Flutter Android 发布与分 ABI 打包](engineering/flutter-android-release.md) | engineering | 要给 Flutter Android 项目出 release 包、传 Release 附件、装机验证；尤其被 versionCode / 分 ABI / 产物核对搞晕过 | Flutter · Android · 发布 | ✅ 已落地 |
 | [性能优化前先定"物理上限"](engineering/performance-ceiling-first.md) | engineering | 有人问"能不能再快一点"；或你正要做性能优化、需要判断值不值得做；也用于评审别人的优化方案 | 性能 · 方法论 · 排查 | ✅ 已落地 |
 | [应用内日志与错误可反馈设计](engineering/app-log-and-error-reporting.md) | engineering | 交付给别人的 App **拿不到现场日志**（真机 / 客户环境 / 无 ADB）；用户只会说"崩了"，而你需要完整证据 | 可观测性 · 崩溃 · 反馈 | ✅ 已落地 |
-| [同步空转 / 内存炸弹的取证与防护](engineering/sync-spin-hang-forensics.md) | engineering | 遇到「CPU 单核满 + 内存一路涨到 OOM + **超时参数杀不掉**」；或调测疑似挂死的用例时**把开发机内存吃满**；也用于给这类 bug 加编译期守护 | 排查 · 死循环 · 内存 · 测试 | ✅ 已落地并验证 |
-| [S3 兼容网盘直连（手写 SigV4）与二分排障法](protocol/s3-compatible-sigv4-direct-client.md) | protocol | App 直连 S3 兼容云（缤纷云等）/WebDAV（坚果云）拿到 400/403/409 一句话回包；或「同步成功但验证失败」时好时坏 | SigV4 · 云盘 · 排查 | ✅ 已落地并验证 |
-| [Flutter 真机 USB 联调取证与协作模式](engineering/android-usb-ondevice-verification.md) | engineering | 真机装包报 -25「无法降级」；adb 点击被 ROM 拦；要走查带真实数据的升级包 | adb · 真机 · 取证 | ✅ 已落地并验证 |
-
 | [CSS 设计令牌驱动的 Flutter 多主题换肤引擎](mobile/design-token-theming-flutter.md) | mobile | 项目要支持多套主题/换肤，且已有或想做 Web 高保真原型共用同一批设计令牌；或深色模式与主题风格需要正交组合 | Flutter · 主题 · 设计令牌 | ✅ 已落地 |
 | [sqflite 版本驱动迁移框架 + FFI 测试](mobile/sqflite-versioned-migration-ffi-testing.md) | mobile | Flutter 本地 SQLite 要加字段/升版本；或 DB 测试在 widget 测试里死锁、构建机下载不到 sqlite3 原生库 | Flutter · sqflite · 迁移 · 测试 | ✅ 已落地 |
 | [模块解耦的可执行守护：import 架构测试](engineering/module-decoupling-architecture-guard.md) | engineering | 担心代码量上来后模块互相牵连（改 A 崩 B / 跨模块回归 / 测试漏测）；想把"不许互相 import"从口头约定变成 CI 红绿 | 架构 · 守护测试 · 解耦 | ✅ 已落地 |
@@ -81,8 +77,8 @@
 | [时间网格「滑选多格 → 标记区间」](mobile/grid-timeslot-drag-mark.md) | mobile | 日程/排班/睡眠等 App 要把一天铺成格子让用户按住拖动批量标记；或需要"任意粒度全天一屏"的固定面积时间网格 | Flutter · 交互 · 手势 · 时间轴 | ✅ 已落地 |
 | [Flutter 测试/运行挂死的 VM Service 现场取证法](mobile/flutter-test-hang-vm-forensics.md) | mobile | widget 测试或真机页面挂死不动、CPU 满核、内存无界增长、`--timeout` 杀不掉；要给无日志黑盒挂起拿到栈级根因 | Flutter · 调试 · VM Service · 守护测试 | ✅ 已落地并验证 |
 | [云盘直连：坚果云 WebDAV 与缤纷云 S3 的接入规则](protocol/cloud-storage-webdav-s3.md) | protocol | 手机/桌面 App 要直连网盘做目录增量同步；要同时接「只有 WebDAV」的坚果云与「只有 S3」的缤纷云；或被 403 SignatureDoesNotMatch、PROPFIND 拿不到容量、刚同步完的文件全被判「已修改」这类坑卡住 | 协议 · WebDAV · S3 · 限流 | ✅ 已落地并验证 |
-
 | [高保真设计会话 → 开场白 → 开发会话的并行交接流程](engineering/parallel-design-kickoff-handoff.md) | engineering | 模块的 AI 高保真设计与代码开发要拆到不同会话并行推进；或交接总要靠"把需求再讲一遍"；或多会话同改一个原型文件互相覆盖 | 流程 · AI协作 · 原型 · 交接 | ✅ 已落地并验证 |
+| [高保真单文件原型设计准则（UI 事实源先行 · 逐屏验收 · 多会话并行）](engineering/hifi-prototype-guidelines.md) | engineering | 要给 App/网页项目立「原型=唯一 UI 事实源」的验收开发流程；或多模块/多 AI 会话并行深化同一份原型；或原型总被评「看起来假、数值对不上、点了没反应」 | 原型 · UI 事实源 · 流程 · 验收 | ✅ 已落地并验证 |
 
 （新增文档后，请回来往这张表加一行，**场景那一列别空着**。）
 
