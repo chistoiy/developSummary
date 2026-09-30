@@ -79,6 +79,8 @@
 | [云盘直连：坚果云 WebDAV 与缤纷云 S3 的接入规则](protocol/cloud-storage-webdav-s3.md) | protocol | 手机/桌面 App 要直连网盘做目录增量同步；要同时接「只有 WebDAV」的坚果云与「只有 S3」的缤纷云；或被 403 SignatureDoesNotMatch、PROPFIND 拿不到容量、刚同步完的文件全被判「已修改」这类坑卡住 | 协议 · WebDAV · S3 · 限流 | ✅ 已落地并验证 |
 | [高保真设计会话 → 开场白 → 开发会话的并行交接流程](engineering/parallel-design-kickoff-handoff.md) | engineering | 模块的 AI 高保真设计与代码开发要拆到不同会话并行推进；或交接总要靠"把需求再讲一遍"；或多会话同改一个原型文件互相覆盖 | 流程 · AI协作 · 原型 · 交接 | ✅ 已落地并验证 |
 | [高保真单文件原型设计准则（UI 事实源先行 · 逐屏验收 · 多会话并行）](engineering/hifi-prototype-guidelines.md) | engineering | 要给 App/网页项目立「原型=唯一 UI 事实源」的验收开发流程；或多模块/多 AI 会话并行深化同一份原型；或原型总被评「看起来假、数值对不上、点了没反应」 | 原型 · UI 事实源 · 流程 · 验收 | ✅ 已落地并验证 |
+| [同表混放软删（回收站）+ 源码级谓词守护](mobile/soft-delete-trash-source-guard.md) | mobile | 清单/笔记/账本类数据要加"删除后可恢复 + 保留期自动清理"；或表里已有 `deleted_at` 却担心某处查询漏谓词，导致"删掉的还在计数、还在提醒"；或想把"所有读取必须带某条件"从口头约定变成一条会红的测试 | 关系库 · 软删除 · 守护测试 · Flutter | ✅ 已落地并验证 |
+| [应用内长图分享通道：RepaintBoundary → PNG → 真实路径回执](mobile/flutter-share-longimage-channel.md) | mobile | App 要做"生成分享长图/报表图并保存"；或各页分享钮只弹"已保存（模拟）"要收成真落盘真回执；或需要在 widget 测试里证明"图真的出来了"（定宽 1080、字节数达标） | Flutter · 分享 · 图片导出 · widget 测试 | ✅ 已落地并验证 |
 
 （新增文档后，请回来往这张表加一行，**场景那一列别空着**。）
 
