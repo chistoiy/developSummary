@@ -81,6 +81,9 @@
 | [高保真单文件原型设计准则（UI 事实源先行 · 逐屏验收 · 多会话并行）](engineering/hifi-prototype-guidelines.md) | engineering | 要给 App/网页项目立「原型=唯一 UI 事实源」的验收开发流程；或多模块/多 AI 会话并行深化同一份原型；或原型总被评「看起来假、数值对不上、点了没反应」 | 原型 · UI 事实源 · 流程 · 验收 | ✅ 已落地并验证 |
 | [同表混放软删（回收站）+ 源码级谓词守护](mobile/soft-delete-trash-source-guard.md) | mobile | 清单/笔记/账本类数据要加"删除后可恢复 + 保留期自动清理"；或表里已有 `deleted_at` 却担心某处查询漏谓词，导致"删掉的还在计数、还在提醒"；或想把"所有读取必须带某条件"从口头约定变成一条会红的测试 | 关系库 · 软删除 · 守护测试 · Flutter | ✅ 已落地并验证 |
 | [应用内长图分享通道：RepaintBoundary → PNG → 真实路径回执](mobile/flutter-share-longimage-channel.md) | mobile | App 要做"生成分享长图/报表图并保存"；或各页分享钮只弹"已保存（模拟）"要收成真落盘真回执；或需要在 widget 测试里证明"图真的出来了"（定宽 1080、字节数达标） | Flutter · 分享 · 图片导出 · widget 测试 | ✅ 已落地并验证 |
+| [配置类提速的同场景对照实验](engineering/config-speedup-ab-experiment.md) | engineering | 有人问「构建/流水线能不能快点」，你加了开关却说不清快了多少；多个开关一起上需要把收益归到具体哪一个；或做过「杀软排除 / 挪缓存盘」这类环境优化想验证是不是真有效 | 性能 · 构建 · 方法论 · 归因 | ✅ 已落地并验证 |
+| [棘轮式守护用例在多写者下的维护口径](engineering/ratchet-guard-multi-writer-policy.md) | engineering | 仓库加了「超标要登记、登记值只许减」的棘轮守护（行数预算 / 静默 catch 登记 / 谓词白名单），多人或多 AI 会话并行后开始报「我没动为什么红」；或守护一直全绿但你怀疑它已空转；或想清掉重复用例又怕丢覆盖 | 测试 · 守护 · 协作 · CI | ✅ 已落地并验证 |
+| [Flutter Android 包体归因与压缩判定](mobile/flutter-apk-size-anatomy.md) | mobile | 被问「安装包能不能再小一点」，需要先判断哪个手段有效；正打算开 R8 / 资源缩减但没算过天花板；或想知道某个三方 SDK 到底占了多大体积 | Flutter · Android · 包体 · 构建 | ✅ 已落地并验证 |
 
 （新增文档后，请回来往这张表加一行，**场景那一列别空着**。）
 
