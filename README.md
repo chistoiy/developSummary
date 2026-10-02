@@ -94,6 +94,8 @@
 |---|---|---|---|---|
 | [性能优化前先定"物理上限"](engineering/performance-ceiling-first.md) | engineering | 有人问"能不能再快一点"；或你正要做性能优化、需要判断值不值得做；也用于评审别人的优化方案 | 性能 · 方法论 · 排查 | ✅ 已落地 |
 | [Flutter 测试/运行挂死的 VM Service 现场取证法](mobile/flutter-test-hang-vm-forensics.md) | mobile | widget 测试或真机页面挂死不动、CPU 满核、内存无界增长、`--timeout` 杀不掉；要给无日志黑盒挂起拿到栈级根因 | Flutter · 调试 · VM Service · 守护测试 | ✅ 已落地并验证 |
+| [同步空转 / 内存炸弹的取证与防护](engineering/sync-spin-hang-forensics.md) | engineering | 遇到「CPU 单核满 + 内存一路涨到 OOM + **超时参数杀不掉**」；或调测疑似挂死的用例时**把开发机内存吃满**；也用于给这类 bug 加编译期守护 | 排查 · 死循环 · 内存 · 测试 | ✅ 已落地并验证 |
+| [Flutter 真机 USB 联调取证与协作模式](engineering/android-usb-ondevice-verification.md) | engineering | 真机装包报 -25「无法降级」；adb 点击被 ROM 拦；要走查带真实数据的升级包 | adb · 真机 · 取证 | ✅ 已落地并验证 |
 
 ### 4.5 移动端交互 · 组件 · 数据
 
@@ -117,6 +119,7 @@
 > `backend/` 与 `web/` 目录已留位，暂无收录；收录后在对应簇加行并新建小节即可。
 
 （新增文档后，请回来往对应簇加一行，**场景那一列别空着**，然后跑 `python tools/lint.py`。）
+| [S3 兼容网盘直连（手写 SigV4）与二分排障法](protocol/s3-compatible-sigv4-direct-client.md) | protocol | App 直连 S3 兼容云（缤纷云等）/WebDAV（坚果云）拿到 400/403/409 一句话回包；或「同步成功但验证失败」时好时坏 | SigV4 · 云盘 · 排查 | ✅ 已落地并验证 |
 ---
 
 ## 5. 文档约定
