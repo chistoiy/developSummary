@@ -57,36 +57,65 @@
 
 ---
 
-## 4. 文档索引
+## 4. 文档索引（按主题簇分组）
 
-**「什么场景用得上」这一列是必填的**——只看标题容易混淆（比如"取消"和"调度"听起来都像架构），
-真正决定要不要点进去的是场景。
+**「什么场景用得上」这一列是必填的**——只看标题容易混淆，真正决定要不要点进去的是场景。
+同一簇内按「先流程后细节」排。新增文档放对簇并在 `tools/lint.py` 里通过登记校验。
+
+### 4.1 AI 协作 · 流程 · UI 事实源
+
+| 文档 | 目录 | 什么场景用得上 | 标签 | 成熟度 |
+|---|---|---|---|---|
+| [高保真设计会话 → 开场白 → 开发会话的并行交接流程](engineering/parallel-design-kickoff-handoff.md) | engineering | 模块的 AI 高保真设计与代码开发要拆到不同会话并行推进；或交接总要靠"把需求再讲一遍"；或多会话同改一个原型文件互相覆盖 | 流程 · AI协作 · 原型 · 交接 | ✅ 已落地并验证 |
+| [高保真单文件原型设计准则（UI 事实源先行 · 逐屏验收 · 多会话并行）](engineering/hifi-prototype-guidelines.md) | engineering | 要给 App/网页项目立「原型=唯一 UI 事实源」的验收开发流程；或多模块/多 AI 会话并行深化同一份原型；或原型总被评「看起来假、数值对不上、点了没反应」 | 原型 · UI 事实源 · 流程 · 验收 | ✅ 已落地并验证 |
+| [Agent 协作项目的上下文治理：三层按需加载 + 工单生命周期 + 漂移守护](engineering/agent-context-governance-lazy-loading.md) | engineering | 新会话开场必读越来越肥、docs 里过期信息与现行规格混杂难路由；多 AI 会话并行后文档/工单失控；想给文档体系上「死链 + 漂移」机器守护并接进收口门禁 | 文档治理 · AI协作 · 守护脚本 · 多会话 | ✅ 已落地并验证 |
+
+### 4.2 守护 · 门禁 · 构建提速
+
+| 文档 | 目录 | 什么场景用得上 | 标签 | 成熟度 |
+|---|---|---|---|---|
+| [模块解耦的可执行守护：import 架构测试](engineering/module-decoupling-architecture-guard.md) | engineering | 担心代码量上来后模块互相牵连（改 A 崩 B / 跨模块回归 / 测试漏测）；想把"不许互相 import"从口头约定变成 CI 红绿 | 架构 · 守护测试 · 解耦 | ✅ 已落地 |
+| [棘轮式守护用例在多写者下的维护口径](engineering/ratchet-guard-multi-writer-policy.md) | engineering | 仓库加了「超标要登记、登记值只许减」的棘轮守护（行数预算 / 静默 catch 登记 / 谓词白名单），多人或多 AI 会话并行后开始报「我没动为什么红」；或守护一直全绿但你怀疑它已空转；或想清掉重复用例又怕丢覆盖 | 测试 · 守护 · 协作 · CI | ✅ 已落地并验证 |
+| [配置类提速的同场景对照实验](engineering/config-speedup-ab-experiment.md) | engineering | 有人问「构建/流水线能不能快点」，你加了开关却说不清快了多少；多个开关一起上需要把收益归到具体哪一个；或做过「杀软排除 / 挪缓存盘」这类环境优化想验证是不是真有效 | 性能 · 构建 · 方法论 · 归因 | ✅ 已落地并验证 |
+
+### 4.3 发布 · 交付 · 产物与包体
+
+| 文档 | 目录 | 什么场景用得上 | 标签 | 成熟度 |
+|---|---|---|---|---|
+| [Flutter Android 发布与分 ABI 打包](engineering/flutter-android-release.md) | engineering | 要给 Flutter Android 项目出 release 包、传 Release 附件、装机验证；尤其被 versionCode / 分 ABI / 产物核对搞晕过 | Flutter · Android · 发布 | ✅ 已落地 |
+| [大模块端到端交付 SOP + GitHub 预发布带 APK](engineering/module-prerelease-delivery-sop.md) | engineering | 产品负责人要求"每完成大模块随时有包可装"；或 UI 需求总在高成本阶段才暴露分歧，需要原型确认门 | 流程 · 发布 · GitHub | ✅ 已落地 |
+| [应用内日志与错误可反馈设计](engineering/app-log-and-error-reporting.md) | engineering | 交付给别人的 App **拿不到现场日志**（真机 / 客户环境 / 无 ADB）；用户只会说"崩了"，而你需要完整证据 | 可观测性 · 崩溃 · 反馈 | ✅ 已落地 |
+| [Flutter Android 包体归因与压缩判定](mobile/flutter-apk-size-anatomy.md) | mobile | 被问「安装包能不能再小一点」，需要先判断哪个手段有效；正打算开 R8 / 资源缩减但没算过天花板；或想知道某个三方 SDK 到底占了多大体积 | Flutter · Android · 包体 · 构建 | ✅ 已落地并验证 |
+
+### 4.4 排障方法论
+
+| 文档 | 目录 | 什么场景用得上 | 标签 | 成熟度 |
+|---|---|---|---|---|
+| [性能优化前先定"物理上限"](engineering/performance-ceiling-first.md) | engineering | 有人问"能不能再快一点"；或你正要做性能优化、需要判断值不值得做；也用于评审别人的优化方案 | 性能 · 方法论 · 排查 | ✅ 已落地 |
+| [Flutter 测试/运行挂死的 VM Service 现场取证法](mobile/flutter-test-hang-vm-forensics.md) | mobile | widget 测试或真机页面挂死不动、CPU 满核、内存无界增长、`--timeout` 杀不掉；要给无日志黑盒挂起拿到栈级根因 | Flutter · 调试 · VM Service · 守护测试 | ✅ 已落地并验证 |
+
+### 4.5 移动端交互 · 组件 · 数据
 
 | 文档 | 目录 | 什么场景用得上 | 标签 | 成熟度 |
 |---|---|---|---|---|
 | [相册「滑动多选」需求与实现方案](mobile/flutter-gallery-drag-selection.md) | mobile | 图片/文件浏览器要做"长按起选 → 按住滑动批量勾/撤"（微信式多选）；或要把已有的多选逻辑重整成可验收的规则 | Flutter · 交互 · 多选 | ✅ 已落地 |
-| [单通道设备的请求调度](mobile/single-channel-request-scheduler.md) | mobile | 对接**一次只能干一件事**的资源：蓝牙、USB/串口、单会话协议、限流 API；或列表滚动时出现请求风暴 / 设备报忙 | 架构 · 调度 · 硬件 | ✅ 已落地 |
+| [时间网格「滑选多格 → 标记区间」](mobile/grid-timeslot-drag-mark.md) | mobile | 日程/排班/睡眠等 App 要把一天铺成格子让用户按住拖动批量标记；或需要"任意粒度全天一屏"的固定面积时间网格 | Flutter · 交互 · 手势 · 时间轴 | ✅ 已落地 |
 | [长任务的取消](mobile/long-task-cancellation.md) | mobile | 大文件传输 / 批量操作 / 长轮询 / 导出压缩，用户点了取消但没反应；或取消被当成了失败、又自动重试了一遍 | 交互 · 架构 · 取消 | ✅ 已落地 |
-| [Flutter Android 发布与分 ABI 打包](engineering/flutter-android-release.md) | engineering | 要给 Flutter Android 项目出 release 包、传 Release 附件、装机验证；尤其被 versionCode / 分 ABI / 产物核对搞晕过 | Flutter · Android · 发布 | ✅ 已落地 |
-| [性能优化前先定"物理上限"](engineering/performance-ceiling-first.md) | engineering | 有人问"能不能再快一点"；或你正要做性能优化、需要判断值不值得做；也用于评审别人的优化方案 | 性能 · 方法论 · 排查 | ✅ 已落地 |
-| [应用内日志与错误可反馈设计](engineering/app-log-and-error-reporting.md) | engineering | 交付给别人的 App **拿不到现场日志**（真机 / 客户环境 / 无 ADB）；用户只会说"崩了"，而你需要完整证据 | 可观测性 · 崩溃 · 反馈 | ✅ 已落地 |
 | [CSS 设计令牌驱动的 Flutter 多主题换肤引擎](mobile/design-token-theming-flutter.md) | mobile | 项目要支持多套主题/换肤，且已有或想做 Web 高保真原型共用同一批设计令牌；或深色模式与主题风格需要正交组合 | Flutter · 主题 · 设计令牌 | ✅ 已落地 |
 | [sqflite 版本驱动迁移框架 + FFI 测试](mobile/sqflite-versioned-migration-ffi-testing.md) | mobile | Flutter 本地 SQLite 要加字段/升版本；或 DB 测试在 widget 测试里死锁、构建机下载不到 sqlite3 原生库 | Flutter · sqflite · 迁移 · 测试 | ✅ 已落地 |
-| [模块解耦的可执行守护：import 架构测试](engineering/module-decoupling-architecture-guard.md) | engineering | 担心代码量上来后模块互相牵连（改 A 崩 B / 跨模块回归 / 测试漏测）；想把"不许互相 import"从口头约定变成 CI 红绿 | 架构 · 守护测试 · 解耦 | ✅ 已落地 |
-| [大模块端到端交付 SOP + GitHub 预发布带 APK](engineering/module-prerelease-delivery-sop.md) | engineering | 产品负责人要求"每完成大模块随时有包可装"；或 UI 需求总在高成本阶段才暴露分歧，需要原型确认门 | 流程 · 发布 · GitHub | ✅ 已落地 |
-| [时间网格「滑选多格 → 标记区间」](mobile/grid-timeslot-drag-mark.md) | mobile | 日程/排班/睡眠等 App 要把一天铺成格子让用户按住拖动批量标记；或需要"任意粒度全天一屏"的固定面积时间网格 | Flutter · 交互 · 手势 · 时间轴 | ✅ 已落地 |
-| [Flutter 测试/运行挂死的 VM Service 现场取证法](mobile/flutter-test-hang-vm-forensics.md) | mobile | widget 测试或真机页面挂死不动、CPU 满核、内存无界增长、`--timeout` 杀不掉；要给无日志黑盒挂起拿到栈级根因 | Flutter · 调试 · VM Service · 守护测试 | ✅ 已落地并验证 |
-| [云盘直连：坚果云 WebDAV 与缤纷云 S3 的接入规则](protocol/cloud-storage-webdav-s3.md) | protocol | 手机/桌面 App 要直连网盘做目录增量同步；要同时接「只有 WebDAV」的坚果云与「只有 S3」的缤纷云；或被 403 SignatureDoesNotMatch、PROPFIND 拿不到容量、刚同步完的文件全被判「已修改」这类坑卡住 | 协议 · WebDAV · S3 · 限流 | ✅ 已落地并验证 |
-| [高保真设计会话 → 开场白 → 开发会话的并行交接流程](engineering/parallel-design-kickoff-handoff.md) | engineering | 模块的 AI 高保真设计与代码开发要拆到不同会话并行推进；或交接总要靠"把需求再讲一遍"；或多会话同改一个原型文件互相覆盖 | 流程 · AI协作 · 原型 · 交接 | ✅ 已落地并验证 |
-| [高保真单文件原型设计准则（UI 事实源先行 · 逐屏验收 · 多会话并行）](engineering/hifi-prototype-guidelines.md) | engineering | 要给 App/网页项目立「原型=唯一 UI 事实源」的验收开发流程；或多模块/多 AI 会话并行深化同一份原型；或原型总被评「看起来假、数值对不上、点了没反应」 | 原型 · UI 事实源 · 流程 · 验收 | ✅ 已落地并验证 |
 | [同表混放软删（回收站）+ 源码级谓词守护](mobile/soft-delete-trash-source-guard.md) | mobile | 清单/笔记/账本类数据要加"删除后可恢复 + 保留期自动清理"；或表里已有 `deleted_at` 却担心某处查询漏谓词，导致"删掉的还在计数、还在提醒"；或想把"所有读取必须带某条件"从口头约定变成一条会红的测试 | 关系库 · 软删除 · 守护测试 · Flutter | ✅ 已落地并验证 |
 | [应用内长图分享通道：RepaintBoundary → PNG → 真实路径回执](mobile/flutter-share-longimage-channel.md) | mobile | App 要做"生成分享长图/报表图并保存"；或各页分享钮只弹"已保存（模拟）"要收成真落盘真回执；或需要在 widget 测试里证明"图真的出来了"（定宽 1080、字节数达标） | Flutter · 分享 · 图片导出 · widget 测试 | ✅ 已落地并验证 |
-| [配置类提速的同场景对照实验](engineering/config-speedup-ab-experiment.md) | engineering | 有人问「构建/流水线能不能快点」，你加了开关却说不清快了多少；多个开关一起上需要把收益归到具体哪一个；或做过「杀软排除 / 挪缓存盘」这类环境优化想验证是不是真有效 | 性能 · 构建 · 方法论 · 归因 | ✅ 已落地并验证 |
-| [棘轮式守护用例在多写者下的维护口径](engineering/ratchet-guard-multi-writer-policy.md) | engineering | 仓库加了「超标要登记、登记值只许减」的棘轮守护（行数预算 / 静默 catch 登记 / 谓词白名单），多人或多 AI 会话并行后开始报「我没动为什么红」；或守护一直全绿但你怀疑它已空转；或想清掉重复用例又怕丢覆盖 | 测试 · 守护 · 协作 · CI | ✅ 已落地并验证 |
-| [Flutter Android 包体归因与压缩判定](mobile/flutter-apk-size-anatomy.md) | mobile | 被问「安装包能不能再小一点」，需要先判断哪个手段有效；正打算开 R8 / 资源缩减但没算过天花板；或想知道某个三方 SDK 到底占了多大体积 | Flutter · Android · 包体 · 构建 | ✅ 已落地并验证 |
+| [单通道设备的请求调度](mobile/single-channel-request-scheduler.md) | mobile | 对接**一次只能干一件事**的资源：蓝牙、USB/串口、单会话协议、限流 API；或列表滚动时出现请求风暴 / 设备报忙 | 架构 · 调度 · 硬件 | ✅ 已落地 |
 
-（新增文档后，请回来往这张表加一行，**场景那一列别空着**。）
+### 4.6 协议 · 服务端 · Web
 
+| 文档 | 目录 | 什么场景用得上 | 标签 | 成熟度 |
+|---|---|---|---|---|
+| [云盘直连：坚果云 WebDAV 与缤纷云 S3 的接入规则](protocol/cloud-storage-webdav-s3.md) | protocol | 手机/桌面 App 要直连网盘做目录增量同步；要同时接「只有 WebDAV」的坚果云与「只有 S3」的缤纷云；或被 403 SignatureDoesNotMatch、PROPFIND 拿不到容量、刚同步完的文件全被判「已修改」这类坑卡住 | 协议 · WebDAV · S3 · 限流 | ✅ 已落地并验证 |
+
+> `backend/` 与 `web/` 目录已留位，暂无收录；收录后在对应簇加行并新建小节即可。
+
+（新增文档后，请回来往对应簇加一行，**场景那一列别空着**，然后跑 `python tools/lint.py`。）
 ---
 
 ## 5. 文档约定
@@ -106,6 +135,8 @@
 5. **验收用例清单** —— 可勾选的 `- [ ]` 列表，逐条测。
 6. **已知坑** —— 现象 → 根因对照表。
 
+> 六段是 `TEMPLATE.md` 十一段的**必备子集**：§1 术语、§3 状态机、§5 数据边界、§6 性能、§7 扩展点按方案类型选填。
+
 > 规则必须写**为什么**（否则下次会被"顺手优化"掉）；
 > 坑必须写**根因**（否则只会记住"这里有问题"，还是会再犯）。
 
@@ -117,7 +148,8 @@
 cp TEMPLATE.md mobile/your-new-plan.md   # 放到对应域目录
 # 填完六段后：
 # 1) 在 README 的「文档索引」加一行
-# 2) git add / commit / push
+# 2) python tools/lint.py 全绿
+# 3) git add / commit / push
 ```
 
 ---
