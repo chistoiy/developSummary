@@ -115,11 +115,11 @@
 | 文档 | 目录 | 什么场景用得上 | 标签 | 成熟度 |
 |---|---|---|---|---|
 | [云盘直连：坚果云 WebDAV 与缤纷云 S3 的接入规则](protocol/cloud-storage-webdav-s3.md) | protocol | 手机/桌面 App 要直连网盘做目录增量同步；要同时接「只有 WebDAV」的坚果云与「只有 S3」的缤纷云；或被 403 SignatureDoesNotMatch、PROPFIND 拿不到容量、刚同步完的文件全被判「已修改」这类坑卡住 | 协议 · WebDAV · S3 · 限流 | ✅ 已落地并验证 |
+| [S3 兼容网盘直连（手写 SigV4）与二分排障法](protocol/s3-compatible-sigv4-direct-client.md) | protocol | App 直连 S3 兼容云（缤纷云等）/WebDAV（坚果云）拿到 400/403/409 一句话回包；或「同步成功但验证失败」时好时坏 | SigV4 · 云盘 · 排查 | ✅ 已落地并验证 |
 
 > `backend/` 与 `web/` 目录已留位，暂无收录；收录后在对应簇加行并新建小节即可。
 
 （新增文档后，请回来往对应簇加一行，**场景那一列别空着**，然后跑 `python tools/lint.py`。）
-| [S3 兼容网盘直连（手写 SigV4）与二分排障法](protocol/s3-compatible-sigv4-direct-client.md) | protocol | App 直连 S3 兼容云（缤纷云等）/WebDAV（坚果云）拿到 400/403/409 一句话回包；或「同步成功但验证失败」时好时坏 | SigV4 · 云盘 · 排查 | ✅ 已落地并验证 |
 ---
 
 ## 5. 文档约定
