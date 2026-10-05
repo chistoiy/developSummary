@@ -79,6 +79,7 @@
 | [棘轮式守护用例在多写者下的维护口径](engineering/ratchet-guard-multi-writer-policy.md) | engineering | 仓库加了「超标要登记、登记值只许减」的棘轮守护（行数预算 / 静默 catch 登记 / 谓词白名单），多人或多 AI 会话并行后开始报「我没动为什么红」；或守护一直全绿但你怀疑它已空转；或想清掉重复用例又怕丢覆盖 | 测试 · 守护 · 协作 · CI | ✅ 已落地并验证 |
 | [配置类提速的同场景对照实验](engineering/config-speedup-ab-experiment.md) | engineering | 有人问「构建/流水线能不能快点」，你加了开关却说不清快了多少；多个开关一起上需要把收益归到具体哪一个；或做过「杀软排除 / 挪缓存盘」这类环境优化想验证是不是真有效 | 性能 · 构建 · 方法论 · 归因 | ✅ 已落地并验证 |
 | [变异自证工装：让"绿测试"证明它真的会红](engineering/mutation-harness-self-verification.md) | engineering | 测试全绿但你不确定它们是否真覆盖交付点；想把"这条改动必须有用例守着"做成一次反向实验；或写脚本批量改源码后怀疑回写没生效（命中 0 次被当成通过）；或在 Windows 上移植测试工装 | 守护 · 变异测试 · 工装脚本 · Windows | ✅ 已落地并验证 |
+| [陈旧红灯归位与死闸判定：欠跑的全量基线怎么收](engineering/stale-red-triage-and-dead-guard.md) | engineering | 批内只跑增量、全量长期不跑，收口时一次现形一片红却分不清是谁的账；或某条断言改成什么值都绿（你不知道它已经不咬人）；或"单跑绿、全量红"说不清是假红还是运气；或变异工装把源码改完不敢保证原样复原 | 测试 · 门禁 · 归因 · 变异测试 | ✅ 已落地并验证 |
 
 ### 4.3 发布 · 交付 · 产物与包体
 
@@ -96,7 +97,7 @@
 | [性能优化前先定"物理上限"](engineering/performance-ceiling-first.md) | engineering | 有人问"能不能再快一点"；或你正要做性能优化、需要判断值不值得做；也用于评审别人的优化方案 | 性能 · 方法论 · 排查 | ✅ 已落地 |
 | [Flutter 测试/运行挂死的 VM Service 现场取证法](mobile/flutter-test-hang-vm-forensics.md) | mobile | widget 测试或真机页面挂死不动、CPU 满核、内存无界增长、`--timeout` 杀不掉；要给无日志黑盒挂起拿到栈级根因 | Flutter · 调试 · VM Service · 守护测试 | ✅ 已落地并验证 |
 | [同步空转 / 内存炸弹的取证与防护](engineering/sync-spin-hang-forensics.md) | engineering | 遇到「CPU 单核满 + 内存一路涨到 OOM + **超时参数杀不掉**」；或调测疑似挂死的用例时**把开发机内存吃满**；也用于给这类 bug 加编译期守护 | 排查 · 死循环 · 内存 · 测试 | ✅ 已落地并验证 |
-| [Flutter 真机 USB 联调取证与协作模式](engineering/android-usb-ondevice-verification.md) | engineering | 真机装包报 -25「无法降级」；adb 点击被 ROM 拦；要走查带真实数据的升级包 | adb · 真机 · 取证 | ✅ 已落地并验证 |
+| [Flutter 真机 USB 联调取证与协作模式](engineering/android-usb-ondevice-verification.md) | engineering | 真机装包报 -25「无法降级」；adb 点击被 ROM 拦；要走查带真实数据的升级包；或长走查里"点了没反应/跳到别的页/坐标突然对不上"（坐标时效、朝向锁定、工装自证） | adb · 真机 · 取证 | ✅ 已落地并验证 |
 
 ### 4.5 移动端交互 · 组件 · 数据
 
@@ -108,6 +109,7 @@
 | [CSS 设计令牌驱动的 Flutter 多主题换肤引擎](mobile/design-token-theming-flutter.md) | mobile | 项目要支持多套主题/换肤，且已有或想做 Web 高保真原型共用同一批设计令牌；或深色模式与主题风格需要正交组合 | Flutter · 主题 · 设计令牌 | ✅ 已落地 |
 | [sqflite 版本驱动迁移框架 + FFI 测试](mobile/sqflite-versioned-migration-ffi-testing.md) | mobile | Flutter 本地 SQLite 要加字段/升版本；或 DB 测试在 widget 测试里死锁、构建机下载不到 sqlite3 原生库 | Flutter · sqflite · 迁移 · 测试 | ✅ 已落地 |
 | [同表混放软删（回收站）+ 源码级谓词守护](mobile/soft-delete-trash-source-guard.md) | mobile | 清单/笔记/账本类数据要加"删除后可恢复 + 保留期自动清理"；或表里已有 `deleted_at` 却担心某处查询漏谓词，导致"删掉的还在计数、还在提醒"；或想把"所有读取必须带某条件"从口头约定变成一条会红的测试 | 关系库 · 软删除 · 守护测试 · Flutter | ✅ 已落地并验证 |
+| [软删回收站的登记式聚合接口：新增一类内容只登记一条就接通](engineering/soft-delete-trash-registry-adapter.md) | engineering | 待办/笔记/书/习惯…多类内容共用一屏回收站，每加一类就要改遍分派/计数/文案/到期清理；或摘掉 `switch` 后担心"漏接一类"没人发现；或回收站行上的派生读数（含追加项的总额）与模块内不一致 | 架构 · 软删除 · 注册表 · 守护测试 | ✅ 已落地并验证 |
 | [应用内长图分享通道：RepaintBoundary → PNG → 真实路径回执](mobile/flutter-share-longimage-channel.md) | mobile | App 要做"生成分享长图/报表图并保存"；或各页分享钮只弹"已保存（模拟）"要收成真落盘真回执；或需要在 widget 测试里证明"图真的出来了"（定宽 1080、字节数达标） | Flutter · 分享 · 图片导出 · widget 测试 | ✅ 已落地并验证 |
 | [单通道设备的请求调度](mobile/single-channel-request-scheduler.md) | mobile | 对接**一次只能干一件事**的资源：蓝牙、USB/串口、单会话协议、限流 API；或列表滚动时出现请求风暴 / 设备报忙 | 架构 · 调度 · 硬件 | ✅ 已落地 |
 | [Dismissible 左滑删除的「乐观出树」定式](mobile/flutter-dismissible-optimistic-removal.md) | mobile | Flutter 清单做左滑删除，调试期抛"A dismissed Dismissible widget is still part of the tree"，或删一行要等异步重查才消失、撤销点了没反应；release 真机看不出问题但测试里必炸 | Flutter · 交互 · 列表 · widget 测试 | ✅ 已落地并验证 |
