@@ -78,6 +78,7 @@
 | [模块解耦的可执行守护：import 架构测试](engineering/module-decoupling-architecture-guard.md) | engineering | 担心代码量上来后模块互相牵连（改 A 崩 B / 跨模块回归 / 测试漏测）；想把"不许互相 import"从口头约定变成 CI 红绿 | 架构 · 守护测试 · 解耦 | ✅ 已落地 |
 | [棘轮式守护用例在多写者下的维护口径](engineering/ratchet-guard-multi-writer-policy.md) | engineering | 仓库加了「超标要登记、登记值只许减」的棘轮守护（行数预算 / 静默 catch 登记 / 谓词白名单），多人或多 AI 会话并行后开始报「我没动为什么红」；或守护一直全绿但你怀疑它已空转；或想清掉重复用例又怕丢覆盖 | 测试 · 守护 · 协作 · CI | ✅ 已落地并验证 |
 | [配置类提速的同场景对照实验](engineering/config-speedup-ab-experiment.md) | engineering | 有人问「构建/流水线能不能快点」，你加了开关却说不清快了多少；多个开关一起上需要把收益归到具体哪一个；或做过「杀软排除 / 挪缓存盘」这类环境优化想验证是不是真有效 | 性能 · 构建 · 方法论 · 归因 | ✅ 已落地并验证 |
+| [变异自证工装：让"绿测试"证明它真的会红](engineering/mutation-harness-self-verification.md) | engineering | 测试全绿但你不确定它们是否真覆盖交付点；想把"这条改动必须有用例守着"做成一次反向实验；或写脚本批量改源码后怀疑回写没生效（命中 0 次被当成通过）；或在 Windows 上移植测试工装 | 守护 · 变异测试 · 工装脚本 · Windows | ✅ 已落地并验证 |
 
 ### 4.3 发布 · 交付 · 产物与包体
 
@@ -109,6 +110,7 @@
 | [同表混放软删（回收站）+ 源码级谓词守护](mobile/soft-delete-trash-source-guard.md) | mobile | 清单/笔记/账本类数据要加"删除后可恢复 + 保留期自动清理"；或表里已有 `deleted_at` 却担心某处查询漏谓词，导致"删掉的还在计数、还在提醒"；或想把"所有读取必须带某条件"从口头约定变成一条会红的测试 | 关系库 · 软删除 · 守护测试 · Flutter | ✅ 已落地并验证 |
 | [应用内长图分享通道：RepaintBoundary → PNG → 真实路径回执](mobile/flutter-share-longimage-channel.md) | mobile | App 要做"生成分享长图/报表图并保存"；或各页分享钮只弹"已保存（模拟）"要收成真落盘真回执；或需要在 widget 测试里证明"图真的出来了"（定宽 1080、字节数达标） | Flutter · 分享 · 图片导出 · widget 测试 | ✅ 已落地并验证 |
 | [单通道设备的请求调度](mobile/single-channel-request-scheduler.md) | mobile | 对接**一次只能干一件事**的资源：蓝牙、USB/串口、单会话协议、限流 API；或列表滚动时出现请求风暴 / 设备报忙 | 架构 · 调度 · 硬件 | ✅ 已落地 |
+| [Dismissible 左滑删除的「乐观出树」定式](mobile/flutter-dismissible-optimistic-removal.md) | mobile | Flutter 清单做左滑删除，调试期抛"A dismissed Dismissible widget is still part of the tree"，或删一行要等异步重查才消失、撤销点了没反应；release 真机看不出问题但测试里必炸 | Flutter · 交互 · 列表 · widget 测试 | ✅ 已落地并验证 |
 
 ### 4.6 协议 · 服务端 · Web
 
