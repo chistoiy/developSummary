@@ -70,7 +70,7 @@
 | [模块注册表 + 屏单一归属 + 分级定位回执：多模块产品的原型-代码一致性治理](engineering/module-registry-single-home-governance.md) | engineering | 同一张界面在多个原型/代码里各存一份副本，改一处要改 N 处、下架改不干净；或 AI 会话每次靠全文检索猜位置、产品说人话而工具只认编号；或新项目要一次性把模块台账/入口/表/校验配齐 | AI协作 · 流程治理 · 原型 · 守护门禁 | 已落地（工装待建） |
 | [高保真单文件原型设计准则（UI 事实源先行 · 逐屏验收 · 多会话并行）](engineering/hifi-prototype-guidelines.md) | engineering | 要给 App/网页项目立「原型=唯一 UI 事实源」的验收开发流程；或多模块/多 AI 会话并行深化同一份原型；或原型总被评「看起来假、数值对不上、点了没反应」 | 原型 · UI 事实源 · 流程 · 验收 | ✅ 已落地并验证 |
 | [Agent 协作项目的上下文治理：三层按需加载 + 工单生命周期 + 漂移守护](engineering/agent-context-governance-lazy-loading.md) | engineering | 新会话开场必读越来越肥、docs 里过期信息与现行规格混杂难路由；多 AI 会话并行后文档/工单失控；想给文档体系上「死链 + 漂移」机器守护并接进收口门禁 | 文档治理 · AI协作 · 守护脚本 · 多会话 | ✅ 已落地并验证 |
-| [Agent 会话运作仪式：开工/收尾口令 + 两档门禁 + 20 分钟窗口 + token 预算](engineering/agent-session-ritual-and-cost-budget.md) | engineering | 每轮开工要人复述背景、收尾全靠自觉；提速只能砍验证；AI 会话的墙钟与 token 成本失控想变成可度量指标；或立了十几条规则照样不被执行 | 流程 · AI协作 · 成本预算 · 门禁 | ✅ 已落地并验证 |
+| [Agent 会话运作仪式：开工/收尾口令 + 两档门禁 + 20 分钟窗口 + token 预算](engineering/agent-session-ritual-and-cost-budget.md) | engineering | 每轮开工要人复述背景、收尾全靠自觉；提速只能砍验证；AI 会话的墙钟与 token 成本失控想变成可度量指标；立了十几条规则照样不被执行；或新项目开局要一份现成的 AGENTS.md/口令/面板初始化种子直接抄用 | 流程 · AI协作 · 成本预算 · 门禁 | ✅ 已落地并验证 |
 
 ### 4.2 守护 · 门禁 · 构建提速
 
