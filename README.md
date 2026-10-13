@@ -69,8 +69,8 @@
 | [高保真设计会话 → 开场白 → 开发会话的并行交接流程](engineering/parallel-design-kickoff-handoff.md) | engineering | 模块的 AI 高保真设计与代码开发要拆到不同会话并行推进；或交接总要靠"把需求再讲一遍"；或多会话同改一个原型文件互相覆盖 | 流程 · AI协作 · 原型 · 交接 | ✅ 已落地并验证 |
 | [模块注册表 + 屏单一归属 + 分级定位回执：多模块产品的原型-代码一致性治理](engineering/module-registry-single-home-governance.md) | engineering | 同一张界面在多个原型/代码里各存一份副本，改一处要改 N 处、下架改不干净；或 AI 会话每次靠全文检索猜位置、产品说人话而工具只认编号；或新项目要一次性把模块台账/入口/表/校验配齐 | AI协作 · 流程治理 · 原型 · 守护门禁 | 已落地（工装待建） |
 | [高保真单文件原型设计准则（UI 事实源先行 · 逐屏验收 · 多会话并行）](engineering/hifi-prototype-guidelines.md) | engineering | 要给 App/网页项目立「原型=唯一 UI 事实源」的验收开发流程；或多模块/多 AI 会话并行深化同一份原型；或原型总被评「看起来假、数值对不上、点了没反应」 | 原型 · UI 事实源 · 流程 · 验收 | ✅ 已落地并验证 |
-| [Agent 协作项目的上下文治理：三层按需加载 + 工单生命周期 + 漂移守护](engineering/agent-context-governance-lazy-loading.md) | engineering | 新会话开场必读越来越肥、docs 里过期信息与现行规格混杂难路由；多 AI 会话并行后文档/工单失控；想给文档体系上「死链 + 漂移」机器守护并接进收口门禁 | 文档治理 · AI协作 · 守护脚本 · 多会话 | ✅ 已落地并验证 |
-| [跨工具可移植的 Agent 规则系统：单一事实源 + 别名矩阵 + 体量棘轮 + 经验坑入仓](engineering/portable-agent-rules-cross-tool.md) | engineering | 换 AI 工具（WorkBuddy ↔ Trae/Qoder/ZCode/Claude Code…）或换电脑后规则丢失、每次要重新讲一遍；项目规则藏在 `.workbuddy/` 这类工具私有目录里，换机 clone 读不到；入口文件越改越肥却被静默截断；想给规则体系上「只减不增」的体量与「必需小节」闸防折叠丢失 | AI协作 · 规则治理 · 跨工具 · 可移植 | 核心结论已实证（守护待落闸） |
+| [Agent 协作项目的上下文治理：三层按需加载 + 工单生命周期 + 漂移守护](engineering/agent-context-governance-lazy-loading.md) | engineering | 新会话开场必读越来越肥、docs 里过期信息与现行规格混杂难路由；多 AI 会话并行后文档/工单失控；或热点/索引类文档（交接文档、排期池）越写越长甚至被历史内容塞爆；想给文档体系上「死链 + 漂移 + 体量」机器守护并接进收口门禁 | 文档治理 · AI协作 · 守护脚本 · 多会话 | ✅ 已落地并验证 |
+| [跨工具可移植的 Agent 规则系统：单一事实源 + 别名矩阵 + 体量棘轮 + 经验坑入仓](engineering/portable-agent-rules-cross-tool.md) | engineering | 换 AI 工具（WorkBuddy ↔ Trae/Qoder/ZCode/Claude Code…）或换电脑后规则丢失、每次要重新讲一遍；项目规则藏在 `.workbuddy/` 这类工具私有目录里，换机 clone 读不到；入口文件越改越肥却被静默截断；想给规则体系上「只减不增」的体量与「必需小节」闸防折叠丢失 | AI协作 · 规则治理 · 跨工具 · 可移植 | ✅ 已落地并验证（六守护落闸＋变异自证＋换机自检脚本） |
 | [Agent 会话运作仪式：开工/收尾口令 + 两档门禁 + 20 分钟窗口 + token 预算](engineering/agent-session-ritual-and-cost-budget.md) | engineering | 每轮开工要人复述背景、收尾全靠自觉；提速只能砍验证；AI 会话的墙钟与 token 成本失控想变成可度量指标；立了十几条规则照样不被执行；或新项目开局要一份现成的 AGENTS.md/口令/面板初始化种子直接抄用 | 流程 · AI协作 · 成本预算 · 门禁 | ✅ 已落地并验证 |
 
 ### 4.2 守护 · 门禁 · 构建提速
